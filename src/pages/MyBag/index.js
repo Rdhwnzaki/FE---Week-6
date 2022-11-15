@@ -2,6 +2,8 @@ import React from "react";
 import jas from  "../picture/jas.png"
 import jeans from  "../picture/jeans.png"
 import {Link}  from 'react-router-dom';
+import MyButtonPlus from "../../components/MyButtonPlus";
+import MyButtonMin from "../../components/MyButtonMin";
 
 
 function MyBagPage() {
@@ -48,9 +50,9 @@ function MyBagPage() {
                 <h6 className="myfont3 color-font">Zalora Cloth</h6>
             </div>
             <div className="col col-3">
-                <button className="btn-min "style={{borderRadius:"50%", marginRight:"10px"}}>-</button>
+                <MyButtonMin/>
                 <span className="myfont3">1</span>
-                <button className="btn-plus shadow" style={{borderRadius:"50%", marginLeft:"10px"}}>+</button>
+                <MyButtonPlus/>
             </div>
             <div className="col col-2">
                 <h6 className="myfont">$ 20.0</h6>
@@ -74,9 +76,9 @@ function MyBagPage() {
                 <h6 className="myfont3 color-font">Zalora Cloth</h6>
             </div>
             <div className="col col-3">
-                <button className="btn-min "style={{borderRadius:"50%", marginRight:"10px"}}>-</button>
+                 <MyButtonMin/>
                 <span className="myfont3">1</span>
-                <button className="btn-plus shadow" style={{borderRadius:"50%", marginLeft:"10px"}}>+</button>
+                <MyButtonPlus/>
             </div>
             <div className="col col-2">
                 <h6 className="myfont">$ 20.0</h6>

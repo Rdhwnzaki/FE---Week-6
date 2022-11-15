@@ -158,7 +158,7 @@ export default function Product() {
   const handleChange = (e) =>{
     setInputData({
       ...inputData,
-      [e.target.name_product]: e.target.value
+      [e.target.name]: e.target.value
     })
     console.log(data)
   }
@@ -267,15 +267,6 @@ export default function Product() {
           }
         </tbody>
       </table>
-        {/* delete data */}
-        {
-          selected &&
-          <div className="container">
-            <button className='btn btn-danger mx-auto col-12' onClick={()=>deleteData()}>
-              delete {temp?.name_product ?? ''}
-          </button>
-          </div>
-        }
 
       {/* alert */}
       {messageShow && 
