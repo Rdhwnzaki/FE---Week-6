@@ -192,7 +192,7 @@ export default function Product() {
           {
             onedit ? 
             <button className='btn btn-outline-danger' type="submit" style={{marginLeft:"15px"}}>
-                update
+                Update Product
               </button>            
             :
             <button className='btn btn-outline-danger' type="submit" style={{marginLeft:"15px"}}>
@@ -233,7 +233,6 @@ export default function Product() {
             <th className='myfont3'>Price</th>
             <th className='myfont3'>Photo</th>
             <th className='myfont3'>Option</th>
-            <th className='myfont3'>Option</th>
           </tr>
         </thead>
         <tbody className='table-group-divider'>
@@ -255,9 +254,6 @@ export default function Product() {
             </td>
             <td className='myfont3'>
               <img src={item.photo_product} className={styles.photo} />
-            </td>
-            <td>
-              <button className='btn btn-outline-danger mx-3'>Update</button>
             </td>
             <td>
             <button className='btn btn-outline-secondary' onClick={()=>deleteData()}>Delete</button>
