@@ -1,0 +1,30 @@
+.logo {
+    margin-right: 20px;
+    height: 40px;
+}
+.myfont {
+    font-family: "Metropolis Bold";
+}
+.link {
+    text-decoration: none;
+}
+.color-font{
+    color: #9b9b9b;
+}
+#button-cust {
+    color: #9b9b9b;
+    margin-top: 0px;
+    height: 48px;
+    width: 150px;
+    border: 1px solid #9b9b9b;
+    outline: none;
+  }
+  #button-seller {
+    margin-top: 0px;
+    height: 48px;
+    width: 150px;
+    outline: none;
+  }
+  .myfont3 {
+    font-family: "Metropolis Medium";
+  }

@@ -1,98 +1,97 @@
-import { useState } from "react";
 import shopLogo from "./image/logo.png";
 import vector from "./image/Vector.png";
 import cart from "./image/shopping-cart.png";
-// import Login from "./pages/Login";
-import { BrowserRouter, Route, Link, Routes, Navigate } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import MyBag from "./pages/MyBag";
+import Profile from "./pages/Profile";
+import { BrowserRouter, Route, Link, Routes, Navigate, useLocation } from "react-router-dom";
+import ProductDetail from "./pages/ProductDetail";
+import Checkout from "./pages/Checkout";
+import Category from "./pages/Category";
+import Reset from "./pages/Reset";
+import Register from "./pages/Register"
+import LoginCustommer from "./pages/LoginCustommer"
+import Product from "./pages/Product"
+import RegisterCustommer from "./pages/RegisterCustommer"
+import MyButtonLogin from "./components/MyButtonLogin";
+import MyButtonSignUp from "./components/MyButtonSignUp";
 
 function App() {
-  const [title, setTitle] = useState("Belajar Frontend");
   return (
     <div className="App">
-      <header className="App-header">{title}</header>
+      <header className="App-header"></header>
       <BrowserRouter>
-        <nav className="navbar navbar-expand-lg navbar-white bg-white">
-          <div className="container text-center">
+        <nav className="container-fluid py-4 navbar-shop sticky-top bg-nav">
+          <div className="container">
             <div className="row align-items-center">
-              <img src={shopLogo} alt="" id="logo--nav" />
-              <h3
-                className="text-danger myfont"
-                style={{ margintop: "20px", marginleft: "10px" }}
-              >
-                Shop.id
-              </h3>
-              <form className="form-inline my-2 my-lg-0">
-                <input
-                  className="form-control mr-sm-2 myfont2"
-                  type="search"
-                  style={{
-                    margintop: "23px",
-                    marginbottom: "15px",
-                    marginleft: "30px",
-                    width: "400px",
-                    borderradius: "30px",
-                    height: "45px",
-                  }}
-                  placeholder="Search"
-                  aria-label="Search"
+              <div className="col-1">
+                <img
+                  src={shopLogo}
+                  alt=""
+                  className="img-fluid"
+                  style={{ marginLeft: "50px" }}
                 />
-              </form>
-              <button
-                className="btn btn-outline-dark btn-block btn-md"
-                id=""
-                style={{
-                  margintop: "23px",
-                  marginbottom: "15px",
-                  height: "40px",
-                  borderradius: "10px",
-                  marginleft: "3px",
-                  width: "50px",
-                }}
-              >
-                <img src={vector} alt="" />
-              </button>
-              <img
-                src={cart}
-                style={{
-                  margintop: "20px",
-                  marginleft: "135px",
-                  marginbottom: "15px",
-                }}
-                alt=""
-              />
-              <button
-                className="btn btn-danger btn-block btn-md myfont2"
-                id="button-cust-2"
-                style={{
-                  margintop: "23px",
-                  marginbottom: "15px",
-                  height: "45px",
-                  borderradius: "40px",
-                  marginleft: "20px",
-                }}
-              >
-                {/* <Link to="/login">Login</Link> */}
-              </button>
-
-              <a href="regisCustommer.html" id="link">
-                <button
-                  className="btn btn-gray btn-outline-danger btn-block btn-md myfont2"
-                  id="button-cust-2"
-                  style={{
-                    margintop: "23px",
-                    marginbottom: "15px",
-                    height: "45px",
-                    borderradius: "40px",
-                    marginleft: "20px",
-                  }}
+              </div>
+              <div className="col-1">
+                <h3
+                  className="myfont text-danger"
+                  style={{ marginTop: "10px" }}
                 >
-                  Signup
+                  Shop.id
+                </h3>
+              </div>
+              <div className="col-5">
+                <form class="form-inline">
+                  <input
+                    class="form-control myfont2 search-input"
+                    type="search"
+                    style={{ borderRadius: "25px", marginLeft: "15px" }}
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                </form>
+              </div>
+              <div className="col-1">
+                <div className="btn btn-outline-dark modal-dialog modal-lg">
+                  <img src={vector} alt="" className="img-fluid" />
+                </div>
+              </div>
+              <div className="col-1">
+                <button className="btn ">
+                  <Link to="/mybag" className="link">
+                  <img src={cart} alt="" className="img-fluid" />
+                  </Link>
                 </button>
-              </a>
+              </div>
+              <div className="col-1">
+                <Link to="/loginCustommer" className="link">
+                <MyButtonLogin/>
+                  </Link>
+              </div>
+              <div className="col-1 offset-1">
+                <Link to='/registerCustommer'>
+                <MyButtonSignUp/>
+                </Link>
+              </div>
             </div>
           </div>
         </nav>
-        <Routes>{/* <Route path="/login" element={<Login />} /> */}</Routes>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" />} replace="true" />
+          <Route path="/home" element={<Home />} />
+          <Route path="/mybag" element={<MyBag />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/productdetail" element={<ProductDetail />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/reset" element={<Reset />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/loginCustommer" element={<LoginCustommer />} />
+          <Route path="/registerCustommer" element={<RegisterCustommer />} />\
+          <Route path="/product" element={<Product />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
