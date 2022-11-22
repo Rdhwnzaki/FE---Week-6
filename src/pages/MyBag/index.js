@@ -2,16 +2,18 @@ import React from "react";
 import jas from  "../picture/jas.png"
 import jeans from  "../picture/jeans.png"
 import {Link}  from 'react-router-dom';
-import MyButtonPlus from "../../components/MyButtonPlus";
-import MyButtonMin from "../../components/MyButtonMin";
+import MyButtonPlus from "../../components/Button/MyButtonPlus";
+import MyButtonMin from "../../components/Button/MyButtonMin";
+import NavbarAfterLogin from "../../components/Navbar/NavbarAfterLogin";
 
 
 function MyBagPage() {
   return (
+    <div>
+    <NavbarAfterLogin/>
     <div className="container-fluid bg-new">
       <div className='container py-3'>
     <h1 className='myfont text-title'>My bag</h1>
-
     <div className="container col-12 row py-3">
     <div className="col col-8 row">
     <div className="container col-12 row">
@@ -105,11 +107,11 @@ function MyBagPage() {
                 <button
                   className="btn btn-danger myfont"
                   style={{
-                    height: "50px",
-                    borderRadius: "40px",
-                    width:"350px"
-                  }}
-                ><p className="myfont3" style={{marginTop:"7px"}}>Buy</p>
+                      height: "50px",
+                      borderRadius: "40px",
+                      width:"350px"
+                    }}
+                    ><p className="myfont3" style={{marginTop:"7px"}}>Buy</p>
                 </button>
                     </Link>
                 </div>
@@ -119,7 +121,7 @@ function MyBagPage() {
     </div>
     </div>
     </div>
-
+    </div>
   );
 }
 

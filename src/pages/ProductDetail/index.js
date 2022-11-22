@@ -1,4 +1,5 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import axios from 'axios';
 import {Link}  from 'react-router-dom';
 import {FaChevronRight} from "react-icons/fa"
 import pic1 from  "../picture/pagep1.png"
@@ -6,10 +7,27 @@ import pic2 from  "../picture/pagep2.png"
 import pic3 from  "../picture/pagep3.png"
 import pic4 from  "../picture/pagep4.png"
 import {FaStar} from "react-icons/fa"
-import jas from  "../picture/jas.png"
+import NavbarBeforeLogin from '../../components/Navbar/NavbarBeforeLogin';
 
 export default function ProductDetail() {
+  const [data, setData] = useState([])
+  const product = `${process.env.REACT_APP_MY_API_KEY}`
+  useEffect(()=>{
+    const getdata = async()=>{
+      try {
+        let result = await axios.get(product)
+        setData(result.data.data)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getdata()
+  }, [])
+  
+  console.log(data)
   return (
+    <div>
+      <NavbarBeforeLogin/>
     <div className="container-fluid bg-new">
       <div className='container py-3'>
         <div className="row py-4">
@@ -173,14 +191,15 @@ export default function ProductDetail() {
           <h6 className='myfont3 color-font'>You’ve never seen it before!</h6>
           <div className="container">
         <div className="row row-cols-1 row-cols-md-5 g-4"style={{marginTop:"8px"}}>
+        {data ? data.map((item)=>(
           <div className="col-2">
             <div className="card" style={{width:"210px"}}>
-              <img src={jas} alt="" />
+              <img src={item.photo_product} style={{height:"200px"}} alt="" />
               <div className="card-body">
                 <Link to="/productdetail" className="link-product">
-                <h3 className='text-product'>Men's formal suit - Black & White</h3>
+                <h3 className='text-product'>{item.name_product}</h3>
                 </Link>
-                <h4 className='text-price'>$ 40.0</h4>
+                <h4 className='text-price'>{item.price_product}</h4>
                 <h5 className='text-brand'>Zalora Cloth</h5>
                 <h6>
                 <FaStar className='fastar'/>
@@ -192,182 +211,11 @@ export default function ProductDetail() {
               </div>
             </div>
           </div>
-          <div className="col-2">
-            <div className="card" style={{width:"210px"}}>
-              <img src={jas} alt="" />
-              <div className="card-body">
-              <Link to="/productdetail" className="link-product">
-                <h3 className='text-product'>Men's formal suit - Black & White</h3>
-                </Link>
-                <h4 className='text-price'>$ 40.0</h4>
-                <h5 className='text-brand'>Zalora Cloth</h5>
-                <h6>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                </h6>
-              </div>
-            </div>
-          </div>
-          <div className="col-2">
-            <div className="card" style={{width:"210px"}}>
-              <img src={jas} alt="" />
-              <div className="card-body">
-              <Link to="/productdetail" className="link-product">
-                <h3 className='text-product'>Men's formal suit - Black & White</h3>
-                </Link>
-                <h4 className='text-price'>$ 40.0</h4>
-                <h5 className='text-brand'>Zalora Cloth</h5>
-                <h6>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                </h6>
-              </div>
-            </div>
-          </div>
-          <div className="col-2">
-            <div className="card" style={{width:"210px"}}>
-              <img src={jas} alt="" />
-              <div className="card-body">
-              <Link to="/productdetail" className="link-product">
-                <h3 className='text-product'>Men's formal suit - Black & White</h3>
-                </Link>
-                <h4 className='text-price'>$ 40.0</h4>
-                <h5 className='text-brand'>Zalora Cloth</h5>
-                <h6>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                </h6>
-              </div>
-            </div>
-          </div>
-          <div className="col-2">
-            <div className="card" style={{width:"210px"}}>
-              <img src={jas} alt="" />
-              <div className="card-body">
-              <Link to="/productdetail" className="link-product">
-                <h3 className='text-product'>Men's formal suit - Black & White</h3>
-                </Link>
-                <h4 className='text-price'>$ 40.0</h4>
-                <h5 className='text-brand'>Zalora Cloth</h5>
-                <h6>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                </h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row row-cols-1 row-cols-md-5 g-4" style={{marginTop:"8px"}}>
-          <div className="col-2">
-            <div className="card" style={{width:"210px"}}>
-              <img src={jas} alt="" />
-              <div className="card-body">
-              <Link to="/productdetail" className="link-product">
-                <h3 className='text-product'>Men's formal suit - Black & White</h3>
-                </Link>
-                <h4 className='text-price'>$ 40.0</h4>
-                <h5 className='text-brand'>Zalora Cloth</h5>
-                <h6>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                </h6>
-              </div>
-            </div>
-          </div>
-          <div className="col-2">
-            <div className="card" style={{width:"210px"}}>
-              <img src={jas} alt="" />
-              <div className="card-body">
-              <Link to="/productdetail" className="link-product">
-                <h3 className='text-product'>Men's formal suit - Black & White</h3>
-                </Link>
-                <h4 className='text-price'>$ 40.0</h4>
-                <h5 className='text-brand'>Zalora Cloth</h5>
-                <h6>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                </h6>
-              </div>
-            </div>
-          </div>
-          <div className="col-2">
-            <div className="card" style={{width:"210px"}}>
-              <img src={jas} alt="" />
-              <div className="card-body">
-              <Link to="/productdetail" className="link-product">
-                <h3 className='text-product'>Men's formal suit - Black & White</h3>
-                </Link>
-                <h4 className='text-price'>$ 40.0</h4>
-                <h5 className='text-brand'>Zalora Cloth</h5>
-                <h6>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                </h6>
-              </div>
-            </div>
-          </div>
-          <div className="col-2">
-            <div className="card" style={{width:"210px"}}>
-              <img src={jas} alt="" />
-              <div className="card-body">
-              <Link to="/productdetail" className="link-product">
-                <h3 className='text-product'>Men's formal suit - Black & White</h3>
-                </Link>
-                <h4 className='text-price'>$ 40.0</h4>
-                <h5 className='text-brand'>Zalora Cloth</h5>
-                <h6>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                </h6>
-              </div>
-            </div>
-          </div>
-          <div className="col-2">
-            <div className="card" style={{width:"210px"}}>
-              <img src={jas} alt="" />
-              <div className="card-body">
-              <Link to="/productdetail" className="link-product">
-                <h3 className='text-product'>Men's formal suit - Black & White</h3>
-                </Link>
-                <h4 className='text-price'>$ 40.0</h4>
-                <h5 className='text-brand'>Zalora Cloth</h5>
-                <h6>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                <FaStar className='fastar'/>
-                </h6>
-              </div>
-            </div>
-          </div>
+           )) : <h1>...Loading</h1>}
         </div>
       </div>
       
+    </div>
     </div>
     </div>
   )

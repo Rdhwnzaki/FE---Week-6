@@ -1,7 +1,11 @@
-import React,{useState,useEffect,Link} from 'react'
+import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import styles from'./Product.module.css'
-import Alert from "../../components/Alert";
+import Alert from "../../components/Alert/Alert";
+import NavbarAfterLogin from '../../components/Navbar/NavbarAfterLogin';
+import { useDispatch } from "react-redux";
+import { fetchProduct } from '../../Redux/Actions/GetProduct';
+import { DeleteProduct } from '../../Redux/Actions/DeleteProduct';
 
 export default function Product() {
   const [data,setData] = useState([])
@@ -25,24 +29,24 @@ export default function Product() {
   const [onedit,setOnedit] = useState(false)
   const [temp,setTemp] = useState(null)
 
-  const deleteData = () => {
-    axios.delete(`http://localhost:3000/products/${selected}`)
-    .then((res)=>{
-        console.log("delete data success")
-        console.log(res)
-        setMessageShow(true)
-        setMessage({title:"success",text:"delete data success",type:"success"})
-        messageTime()
-        getData()
-      })
-      .catch((err)=>{
-        console.log("delete data fail")
-        console.log(err)
-        setMessageShow(true)
-      setMessage({title:"fail",text:"delete data fail",type:"danger"})
-      messageTime()
-    })
-  }
+  // const deleteData = () => {
+  //   axios.delete(`${process.env.REACT_APP_MY_API_KEY}/${selected}`)
+  //   .then((res)=>{
+  //       console.log("delete data success")
+  //       console.log(res)
+  //       setMessageShow(true)
+  //       setMessage({title:"success",text:"delete data success",type:"success"})
+  //       messageTime()
+  //       getData()
+  //     })
+  //     .catch((err)=>{
+  //       console.log("delete data fail")
+  //       console.log(err)
+  //       setMessageShow(true)
+  //     setMessage({title:"fail",text:"delete data fail",type:"danger"})
+  //     messageTime()
+  //   })
+  // }
 
   const editForm = (item) =>{
     console.log(item)
@@ -76,26 +80,27 @@ export default function Product() {
     getData()
   },[])
 
-  let users = `http://localhost:3000/products?sortby=${sortBy}&sort=${sort}&search=${inputData.search}`
+  let users = `${process.env.REACT_APP_MY_API_KEY}?sortby=${sortBy}&sort=${sort}&search=${inputData.search}`
+  const dispatch = useDispatch()
   const getData = ()=> {
     axios.get(users)
     .then((res)=>{
-        console.log("get data success")
         console.log(res.data.data)
         res.data && setData(res.data.data)
         !selected && setMessageShow(true)
-        !selected && setMessage({title:"success",text:"get data success",type:"success"})
+        !selected && setMessage({title:"success",text:"Get Data Success",type:"success"})
         !selected && messageTime()
         setSelected(null)
       })
       .catch((err)=>{
-        console.log("get data fail")
+        console.log("Get Data Fail")
         console.log(err)
          setData([])
         setMessageShow(true)
-      setMessage({title:"fail",text:"get data fail",type:"danger"})
+      setMessage({title:"fail",text:"Get Data Fail",type:"danger"})
       messageTime()
     })
+    dispatch(fetchProduct(data))
   }
 
   const postForm = (e) => {
@@ -109,19 +114,19 @@ export default function Product() {
     console.log(formData)
     if(!selected){
       axios
-      .post('http://localhost:3000/products',formData,{
+      .post(`${process.env.REACT_APP_MY_API_KEY}`,formData,{
         headers: {
           "Content-Type": "multipart/form-data",
         },
       }).then((res)=>{
-        console.log("input data success")
+        console.log("Input Data Success")
       console.log(res)
       setMessageShow(true)
       setMessage({title:"success",text:"post data success",type:"success"})
       messageTime()
       getData()
     }).catch((err)=>{
-      console.log("input data fail")
+      console.log("Input Data Fail")
       setMessageShow(true)
       setMessage({title:"fail",text:"post data fail",type:"danger"})
       messageTime()
@@ -129,19 +134,19 @@ export default function Product() {
     })
   } else {
     axios
-    .put(`http://localhost:3000/products/${selected}`,formData,{
+    .put(`${process.env.REACT_APP_MY_API_KEY}/${selected}`,formData,{
       headers: {
         "Content-Type": "multipart/form-data",
       },
     }).then((res)=>{
-      console.log("input data success")
+      console.log("Update Data Success")
       console.log(res)
       setMessageShow(true)
       setMessage({title:"success",text:"update data success",type:"success"})
       messageTime()
       getData()
   }).catch((err)=>{
-    console.log("input data fail")
+    console.log("Update Data Fail")
     setMessageShow(true)
       setMessage({title:"fail",text:"post data fail",type:"danger"})
       messageTime()
@@ -164,6 +169,7 @@ export default function Product() {
   }
   return (
     <div>
+      <NavbarAfterLogin/>
       {/* post data */}
       <form onSubmit={postForm} className="container mt-3 p-2 bg-new shadow">
         <div className="container">
@@ -224,7 +230,7 @@ export default function Product() {
 
 
       {/* get data */}
-      <table className='table table-striped table-hover container shadow' style={{color:"#DB3022;"}}>
+      <table className='table table-striped table-hover container shadow' style={{color:"black"}}>
         <thead>
           <tr>
             <th className='myfont3'>Number</th>
@@ -256,7 +262,7 @@ export default function Product() {
               <img src={item.photo_product} className={styles.photo} />
             </td>
             <td>
-            <button className='btn btn-outline-secondary' onClick={()=>deleteData()}>Delete</button>
+            <button className='btn btn-outline-secondary' onClick={()=>DeleteProduct()}>Delete</button>
             </td>
           </tr>
           ))

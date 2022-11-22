@@ -681,7 +681,16 @@ aside {
 .button-color{
   height: 28px;
   width: 28px;
-  border-radius: 90px;
+}
+.button-color:focus{
+  background:#ff5e00;
+}
+.button-size:focus{
+  background:#DB3022;
+  color: white;
+}
+.button-color-1{
+  color: #BEA9A9;
 }
 .btn-min{
   background-color: #e5e5e5;

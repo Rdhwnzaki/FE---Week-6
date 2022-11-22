@@ -3,7 +3,7 @@ const MyButtonLogin = () =>{
     return(
         <div className="btn">
             <button
-                  class="btn btn-danger myfont2"
+                  className="btn btn-danger myfont2"
                   id="button-cust-2"
                   style={{
                     height: "45px",

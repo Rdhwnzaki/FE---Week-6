@@ -1,9 +1,14 @@
 import React from 'react'
+import ModalAddress from '../../components/Modal/ModalAddress'
+import ModalPayment from '../../components/Modal/ModalPayment'
+import NavbarAfterLogin from '../../components/Navbar/NavbarAfterLogin'
 import jas from  "../picture/jas.png"
 import jeans from  "../picture/jeans.png"
 
 export default function Checkout() {
   return (
+    <div>
+    <NavbarAfterLogin/>
     <div className="container-fluid bg-new">
       <div className='container py-3'>
     <h1 className='myfont text-title'>Checkout</h1>
@@ -23,9 +28,7 @@ export default function Checkout() {
         </div>
         <div className="row">
             <div className="col-12">
-                <button className='btn btn-outline-secondary' style={{borderRadius:"20px", width:"229px",height:"35px"}}>
-                    <h6 className='myfont3' style={{color:"#9b9b9b",marginTop:"2px"}}>Choose another address</h6>
-                </button>
+                <ModalAddress/>
             </div>
         </div>
         </div>
@@ -95,19 +98,11 @@ export default function Checkout() {
             </div>
             <div className="row align-items-center py-3">
                 <div className="col-12">
-                <button
-                  class="btn btn-danger myfont3"
-                  style={{
-                    height: "50px",
-                    borderRadius: "40px",
-                    width:"350px"
-                  }}
-                >
-                    <h6 className='myfont3' style={{marginTop:"9px"}}>Select payment</h6>
-                </button>
+                <ModalPayment/>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
     </div>

@@ -2,9 +2,12 @@ import React from 'react'
 import jas from  "../picture/jas.png"
 import {Link}  from 'react-router-dom';
 import { FaChevronRight, FaStar } from 'react-icons/fa';
+import NavbarBeforeLogin from '../../components/Navbar/NavbarBeforeLogin';
 
  function Category() {
   return (
+    <div>
+      <NavbarBeforeLogin/>
     <div className='container-fluid bg-new'>
         <div className="container py-3">
             <div className="row py-3">
@@ -218,6 +221,7 @@ import { FaChevronRight, FaStar } from 'react-icons/fa';
         </div>
       </div>
         </div>
+    </div>
     </div>
   )
 }
