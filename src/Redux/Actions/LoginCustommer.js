@@ -1,7 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export const loginUser = (data, navigate) => async (dispatch) => {
+export const loginCus = (data, navigate) => async (dispatch) => {
   try {
     console.log(data);
     dispatch({ type: "USER_LOGIN_PENDING" });
@@ -10,7 +10,7 @@ export const loginUser = (data, navigate) => async (dispatch) => {
     console.log(user);
     localStorage.setItem("token", user.token);
     dispatch({ type: "USER_LOGIN_SUCCESS", payload: user });
-    navigate("/profile");
+    navigate("/home");
     console.log("User Login Success");
     Swal.fire("Success", "Login success", "success");
   } catch (err) {
