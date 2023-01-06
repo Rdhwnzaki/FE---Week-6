@@ -9,6 +9,7 @@ export const loginUser = (data, navigate) => async (dispatch) => {
     const user = result.data.message;
     console.log(user);
     localStorage.setItem("token", user.token);
+    localStorage.setItem("role", user.role_user);
     dispatch({ type: "USER_LOGIN_SUCCESS", payload: user });
     navigate("/profile");
     console.log("User Login Success");

@@ -12,6 +12,8 @@ import Selling from "./pages/SellingProduct";
 import LoginCustommer from "./pages/LoginCustommer";
 import Product from "./pages/Product";
 import RegisterCustommer from "./pages/RegisterCustommer";
+import Otp from "./pages/Otp";
+import OtpCustommer from "./pages/OtpCustommer";
 import Swal from "sweetalert2";
 import { Outlet } from "react-router-dom";
 
@@ -32,6 +34,7 @@ function App() {
           <Route path="/" element={<Navigate to="/home" />} replace="true" />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/category/:id_category" element={<Category />} />
           <Route
             path="/productdetail/:id_product"
             element={<ProductDetail />}
@@ -45,9 +48,6 @@ function App() {
           <Route path="/checkout" element={<PrivateRoute />}>
             <Route index element={<Checkout />} />
           </Route>
-          <Route path="/category/:id_category" element={<PrivateRoute />}>
-            <Route index element={<Category />} />
-          </Route>
           <Route path="/product" element={<PrivateRoute />}>
             <Route index element={<Product />} />
           </Route>
@@ -55,6 +55,8 @@ function App() {
             <Route index element={<Selling />} />
           </Route>
           <Route path="/reset" element={<Reset />} />
+          <Route path="/otp" element={<Otp />} />
+          <Route path="/otp-custommer" element={<OtpCustommer />} />
           <Route path="/register" element={<Register />} />
           <Route path="/loginCustommer" element={<LoginCustommer />} />
           <Route path="/registerCustommer" element={<RegisterCustommer />} />\

@@ -152,7 +152,10 @@ export default function LoginCustommer() {
             </button>
             <p className="text-dark text-center" id="text-all">
               Don't have Shop.id account?
-              <Link to="/register" className="text-danger link myfont3">
+              <Link
+                to="/registerCustommer"
+                className="text-danger link myfont3"
+              >
                 {" "}
                 Register
               </Link>
