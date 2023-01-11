@@ -11,7 +11,7 @@ export const loginUser = (data, navigate) => async (dispatch) => {
     localStorage.setItem("token", user.token);
     localStorage.setItem("role", user.role_user);
     dispatch({ type: "USER_LOGIN_SUCCESS", payload: user });
-    navigate("/profile");
+    navigate("/profile-seller");
     console.log("User Login Success");
     Swal.fire("Success", "Login success", "success");
   } catch (err) {

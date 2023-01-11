@@ -1,16 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./Profile.module.css";
+import DatePicker from "react-datepicker";
+import homelogo from "../../image/homelogo.png";
 import cube from "../../image/cube.png";
+import Accordion from "react-bootstrap/Accordion";
 import cart from "../../image/shopping-cart (3) 1.png";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ModalEditPhoto from "../../components/Modal/ModalEditPhoto";
 
-export default function ProfileSeller() {
+export default function ProfileCustommer() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const logout = () => {
@@ -24,6 +26,7 @@ export default function ProfileSeller() {
     },
   };
   const [data, setData] = useState(null);
+  const [startDate, setStartDate] = useState(new Date());
   let users = "http://localhost:3000/users/profile";
   useEffect(() => {
     axios
@@ -40,10 +43,11 @@ export default function ProfileSeller() {
   }, []);
   // const [photo_user, setPhotoUser] = useState(null);
   const [updateData, setUpdateData] = useState({
-    store_name: data?.store_name,
+    fullname_user: data?.fullname_user,
     email_user: data?.email_user,
     phone_user: data?.phone_user,
-    store_description: data?.store_description,
+    gender_user: data?.gender_user,
+    date_user: data?.date_user,
   });
 
   // const handlePhotoChange = (e) => {
@@ -62,13 +66,14 @@ export default function ProfileSeller() {
   const handleData = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("store_name", updateData.store_name);
+    formData.append("fullname_user", updateData.fullname_user);
     formData.append("email_user", updateData.email_user);
     formData.append("phone_user", updateData.phone_user);
-    formData.append("store_description", updateData.store_description);
+    formData.append("gender_user", updateData.gender_user);
+    formData.append("date_user", updateData.date_user);
     console.log(formData);
     axios
-      .put(`http://localhost:3000/users/edit-profile-seller`, formData, user, {
+      .put(`http://localhost:3000/users/edit-profile`, formData, user, {
         "content-type": "multipart/form-data",
       })
       .then((res) => {
@@ -98,45 +103,96 @@ export default function ProfileSeller() {
               style={{ height: "140px", width: "140px" }}
             />
             <div className="d-flex flex-column h-50 mt-3 ms-2">
-              <h6 className="myfont ms-3">{data?.store_name}</h6>
+              <h6 className="myfont ms-3">{data?.fullname_user}</h6>
               <ModalEditPhoto />
             </div>
           </div>
         </div>
 
         <div className="w-50 justify-content-center d-flex flex-column mt-5 ms-5">
-          <Link to="/product">
-            <button className="myfont3 btn">
-              <div
-                className="btn mx-2"
-                style={{
-                  backgroundColor: "#F36F45",
-                  borderRadius: "50px",
-                  width: "40px",
-                }}
-              >
-                <img src={cube} alt="" />
-              </div>
-              Product
-            </button>
-          </Link>
-          <Link to="/order">
-            <button className="myfont3 btn">
-              <div
-                className="btn mx-2"
-                style={{
-                  backgroundColor: "#F3456F",
-                  borderRadius: "50px",
-                  width: "40px",
-                }}
-              >
-                <img src={cart} alt="" />
-              </div>
-              Order
-            </button>
-          </Link>
+          <Accordion flush>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>
+                <p className="myfont3">
+                  <div
+                    className="btn mx-2"
+                    style={{
+                      backgroundColor: "#456BF3",
+                      borderRadius: "50px",
+                      width: "40px",
+                    }}
+                  >
+                    <img src={homelogo} alt="" />
+                  </div>
+                  Store
+                </p>
+              </Accordion.Header>
+              <Accordion.Body>
+                <Link to="/profile">
+                  <button className="btn">
+                    <p className=" myfont3">Store Profile</p>
+                  </button>
+                </Link>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+          <Accordion flush>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>
+                <p className="myfont3">
+                  <div
+                    className="btn mx-2"
+                    style={{
+                      backgroundColor: "#F36F45",
+                      borderRadius: "50px",
+                      width: "40px",
+                    }}
+                  >
+                    <img src={cube} alt="" />
+                  </div>
+                  Product
+                </p>
+              </Accordion.Header>
+              <Accordion.Body>
+                <Link to="/product">
+                  <button className="btn">
+                    <p className=" myfont3">My Product</p>
+                  </button>
+                </Link>
+              </Accordion.Body>
+              <Accordion.Body>
+                <Link to="/selling">
+                  <button className="btn">
+                    <p className=" myfont3">Selling products</p>
+                  </button>
+                </Link>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+          <Accordion flush>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>
+                <p className="myfont3">
+                  <div
+                    className="btn mx-2"
+                    style={{
+                      backgroundColor: "#F3456F",
+                      borderRadius: "50px",
+                      width: "40px",
+                    }}
+                  >
+                    <img src={cart} alt="" />
+                  </div>
+                  Order
+                </p>
+              </Accordion.Header>
+              <Accordion.Body>
+                <p className="myfont3">My Order</p>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
           <button
-            className="btn btn-danger btn-small rounded-pill mt-5"
+            className="btn btn-danger btn-small rounded-pill"
             onClick={() => logout()}
           >
             Logout
@@ -154,15 +210,15 @@ export default function ProfileSeller() {
           <div className="col col-8 row">
             {/* form */}
             <div className="col col-12 row ">
-              <div className="col col-3 myfont3">Store Name</div>
+              <div className="col col-3 myfont3">Name</div>
               <div className="col col-9">
                 <input
                   type="text"
                   className="form-control mb-3 myfont3"
-                  name="store_name"
-                  placeholder={data?.store_name}
+                  name="fullname_user"
+                  placeholder={data?.fullname_user}
                   onChange={(e) => handleChange(e)}
-                  value={updateData.store_name}
+                  value={updateData.fullname_user}
                 />
               </div>
             </div>
@@ -193,15 +249,29 @@ export default function ProfileSeller() {
               </div>
             </div>
             <div className="col col-12 row ">
-              <div className="col col-3 myfont3">Store description</div>
+              <div className="col col-3 myfont3">Gender</div>
               <div className="col col-9 row mb-3">
-                <textarea
-                  className="form-control  mb-3 myfont3 ms-2"
-                  name="store_description"
-                  placeholder={data?.store_description}
+                <input
+                  type="text"
+                  className="form-control  mb-3 myfont3"
+                  name="gender_user"
+                  placeholder={data?.gender_user}
                   onChange={(e) => handleChange(e)}
-                  value={updateData.store_description}
-                ></textarea>
+                  value={updateData.gender_user}
+                />
+              </div>
+              <div className="col col-12 row  mt-3">
+                <div className="col col-3 myfont3">Date of birth</div>
+                <div className="col col-9">
+                  <input
+                    type="date"
+                    className="form-control  mb-3 myfont3"
+                    name="date_user"
+                    placeholder={data?.date_user}
+                    onChange={(e) => handleChange(e)}
+                    value={updateData.date_user}
+                  />
+                </div>
               </div>
             </div>
             <div className="col col-12 row mb-3">

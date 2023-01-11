@@ -67,9 +67,7 @@ function NavbarAfterLogin() {
             </button>
           </div>
           <div className="col-1">
-            <Link to="/profile">
-              <AvatarImage />
-            </Link>
+            <AvatarImage />
           </div>
           <div className="col-1">
             <button

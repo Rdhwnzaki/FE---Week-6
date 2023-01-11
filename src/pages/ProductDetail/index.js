@@ -12,13 +12,23 @@ import NavbarBeforeLogin from "../../components/Navbar/NavbarBeforeLogin";
 import NavbarAfterLogin from "../../components/Navbar/NavbarAfterLogin";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function ProductDetail() {
   const [data, setData] = useState([]);
   const [dataProduct, setDataProduct] = useState([]);
+  const [product_id, setProductId] = useState("");
+  const [total_transaction, setTotalTransaction] = useState("");
+  const [sellerId, setSellerId] = useState("");
+  const [qty_transaction, setQtyTransaction] = useState(1);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const { id_product } = useParams();
+  const user = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const product = `${process.env.REACT_APP_MY_API_KEY}`;
   useEffect(() => {
     const getdata = async () => {
@@ -38,13 +48,37 @@ export default function ProductDetail() {
       .then((res) => {
         console.log("Get detail product success");
         console.log(res.data);
-        res.data && setDataProduct(res.data.data[0]);
+        setDataProduct(res.data.data[0]);
+        setProductId(res.data.data[0].id_product);
+        setTotalTransaction(res.data.data[0].price_product);
+        setSellerId(res.data.data[0].user_id);
       })
       .catch((err) => {
         console.log("Get detail product fail");
         console.log(err);
       });
   }, []);
+  const postData = async (e) => {
+    e.preventDefault();
+    let form = {
+      product_id: product_id,
+      total_transaction: total_transaction * qty_transaction,
+      qty_transaction: qty_transaction,
+      seller_id: sellerId,
+    };
+    axios
+      .post(`http://localhost:3000/transaction/post-transaction`, form, user)
+      .then((res) => {
+        console.log("Add product to bag success");
+        console.log(res);
+        Swal.fire("Success", "Add product to bag success", "success");
+      })
+      .catch((err) => {
+        console.log("Add product to bag failed");
+        console.log(err);
+        Swal.fire("Warning", "Add product to bag failed", "error");
+      });
+  };
   return (
     <div>
       {token ? <NavbarAfterLogin /> : <NavbarBeforeLogin />}
@@ -116,7 +150,6 @@ export default function ProductDetail() {
                   className="btn btn-success button-color"
                   style={{ borderRadius: "50px", marginLeft: "10px" }}
                 ></button>
-
                 <div className="row mt-5 mb-3">
                   <div className="col-md-6">
                     <h6 className="myfont" style={{ marginLeft: "29px" }}>
@@ -142,13 +175,15 @@ export default function ProductDetail() {
                     </h6>
                     <button
                       className=" btn-min "
+                      onClick={() => setQtyTransaction(qty_transaction - 1)}
                       style={{ borderRadius: "50%", marginRight: "10px" }}
                     >
                       -
                     </button>
-                    <span className="myfont3">1</span>
+                    <span className="myfont3">{qty_transaction}</span>
                     <button
                       className=" btn-plus shadow"
+                      onClick={() => setQtyTransaction(qty_transaction + 1)}
                       style={{ borderRadius: "50%", marginLeft: "10px" }}
                     >
                       +
@@ -158,20 +193,14 @@ export default function ProductDetail() {
 
                 <div className="row">
                   <div className="col-md-3">
-                    <button
-                      type="submit"
-                      className="btn btn-outline-secondary btn-in-product rounded-pill"
-                    >
+                    <button className="btn btn-outline-secondary btn-in-product rounded-pill">
                       <h6 className="myfont3" style={{ marginTop: "5px" }}>
                         Chat
                       </h6>
                     </button>
                   </div>
                   <div className="col-md-3">
-                    <button
-                      type="submit"
-                      className="btn btn-outline-secondary btn-in-product rounded-pill"
-                    >
+                    <button className="btn btn-outline-secondary btn-in-product rounded-pill">
                       <h6 className="myfont3" style={{ marginTop: "5px" }}>
                         Add bag
                       </h6>
@@ -180,6 +209,7 @@ export default function ProductDetail() {
                   <div className="col-md-6">
                     <button
                       type="submit"
+                      onClick={postData}
                       className="btn btn-danger btn-in-product2 rounded-pill"
                     >
                       <h6 className="myfont3" style={{ marginTop: "5px" }}>

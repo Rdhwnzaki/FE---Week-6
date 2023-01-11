@@ -1,7 +1,7 @@
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import MyBag from "./pages/MyBag";
-import Profile from "./pages/Profile";
+import ProfileSeller from "./pages/Profile";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import ProductDetail from "./pages/ProductDetail";
 import Checkout from "./pages/Checkout";
@@ -14,8 +14,12 @@ import Product from "./pages/Product";
 import RegisterCustommer from "./pages/RegisterCustommer";
 import Otp from "./pages/Otp";
 import OtpCustommer from "./pages/OtpCustommer";
+import ProfileCustommer from "./pages/ProfileCustommer";
+import EditProduct from "./pages/EditProduct";
 import Swal from "sweetalert2";
 import { Outlet } from "react-router-dom";
+import EditCategory from "./pages/EditCategory";
+import Order from "./pages/Order";
 
 function App() {
   const PrivateRoute = () => {
@@ -42,8 +46,11 @@ function App() {
           <Route path="/mybag" element={<PrivateRoute />}>
             <Route index element={<MyBag />} />
           </Route>
-          <Route path="/profile" element={<PrivateRoute />}>
-            <Route index element={<Profile />} />
+          <Route path="/profile-seller" element={<PrivateRoute />}>
+            <Route index element={<ProfileSeller />} />
+          </Route>
+          <Route path="/profile-custommer" element={<PrivateRoute />}>
+            <Route index element={<ProfileCustommer />} />
           </Route>
           <Route path="/checkout" element={<PrivateRoute />}>
             <Route index element={<Checkout />} />
@@ -53,6 +60,15 @@ function App() {
           </Route>
           <Route path="/selling" element={<PrivateRoute />}>
             <Route index element={<Selling />} />
+          </Route>
+          <Route path="/edit-product/:id_product" element={<PrivateRoute />}>
+            <Route index element={<EditProduct />} />
+          </Route>
+          <Route path="/edit-category/:id_product" element={<PrivateRoute />}>
+            <Route index element={<EditCategory />} />
+          </Route>
+          <Route path="/order" element={<PrivateRoute />}>
+            <Route index element={<Order />} />
           </Route>
           <Route path="/reset" element={<Reset />} />
           <Route path="/otp" element={<Otp />} />

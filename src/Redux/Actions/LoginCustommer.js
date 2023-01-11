@@ -10,6 +10,7 @@ export const loginCus = (data, navigate) => async (dispatch) => {
     console.log(user);
     localStorage.setItem("token", user.token);
     localStorage.setItem("role", user.role_user);
+    localStorage.setItem("id_user", user.id_user);
     dispatch({ type: "USER_LOGIN_SUCCESS", payload: user });
     navigate("/home");
     console.log("User Login Success");
