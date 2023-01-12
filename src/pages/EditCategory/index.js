@@ -37,7 +37,11 @@ const EditCategory = () => {
     formData.append("photo_category", photo_category);
     console.log(formData);
     axios
-      .put(`http://localhost:3000/category/edit/${id_category}`, formData, user)
+      .put(
+        `${process.env.REACT_APP_MY_API_KEY}/category/edit/${id_category}`,
+        formData,
+        user
+      )
       .then((res) => {
         console.log("Put category success");
         console.log(res);

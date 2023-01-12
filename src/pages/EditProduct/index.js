@@ -20,7 +20,7 @@ const EditProduct = () => {
       Authorization: `Bearer ${token}`,
     },
   };
-  let getData = `http://localhost:3000/products/detail/${id_product}`;
+  let getData = `${process.env.REACT_APP_MY_API_KEY}/products/detail/${id_product}`;
   useEffect(() => {
     axios
       .get(getData, user)
@@ -61,7 +61,11 @@ const EditProduct = () => {
     formData.append("photo_product", photo_product);
     console.log(formData);
     axios
-      .put(`http://localhost:3000/products/${id_product}`, formData, user)
+      .put(
+        `${process.env.REACT_APP_MY_API_KEY}/products/${id_product}`,
+        formData,
+        user
+      )
       .then((res) => {
         console.log("Put product success");
         console.log(res);

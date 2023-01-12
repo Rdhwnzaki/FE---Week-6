@@ -5,7 +5,10 @@ export const otpCustommer = (data, navigate) => async (dispatch) => {
   try {
     console.log(data);
     dispatch({ type: "USER_VERIF_PENDING" });
-    const result = await axios.post(`http://localhost:3000/users/verif`, data);
+    const result = await axios.post(
+      `${process.env.REACT_APP_MY_API_KEY}/users/verif`,
+      data
+    );
     const user = result.data.message;
     console.log(user);
     dispatch({ type: "USER_VERIF_SUCCESS", payload: user });

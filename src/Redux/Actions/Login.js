@@ -5,7 +5,10 @@ export const loginUser = (data, navigate) => async (dispatch) => {
   try {
     console.log(data);
     dispatch({ type: "USER_LOGIN_PENDING" });
-    const result = await axios.post(`http://localhost:3000/users/login`, data);
+    const result = await axios.post(
+      `${process.env.REACT_APP_MY_API_KEY}/users/login`,
+      data
+    );
     const user = result.data.message;
     console.log(user);
     localStorage.setItem("token", user.token);

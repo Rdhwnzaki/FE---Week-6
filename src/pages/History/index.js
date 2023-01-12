@@ -26,7 +26,7 @@ function History() {
   useEffect(() => {
     getData();
   }, []);
-  let getCheckout = `http://localhost:3000/checkout/get-checkout?search=${inputData.search}`;
+  let getCheckout = `${process.env.REACT_APP_MY_API_KEY}/checkout/get-checkout?search=${inputData.search}`;
   const getData = () => {
     axios
       .get(getCheckout, user)
@@ -46,7 +46,7 @@ function History() {
   useEffect(() => {
     getDataDone();
   }, []);
-  let getCheckoutDone = `http://localhost:3000/checkout/get-checkout-done?search=${inputData.search}`;
+  let getCheckoutDone = `${process.env.REACT_APP_MY_API_KEY}/checkout/get-checkout-done?search=${inputData.search}`;
   const getDataDone = () => {
     axios
       .get(getCheckoutDone, user)

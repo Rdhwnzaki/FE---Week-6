@@ -16,12 +16,9 @@ function Order() {
   const [inputData, setInputData] = useState({
     search: "",
   });
-  const [sortBy, setSortBy] = useState("name_product");
-  const [sort, setSort] = useState("asc");
   useEffect(() => {
-    console.log("checked", sortBy);
     getData();
-  }, [sortBy, sort, inputData.search]);
+  }, [inputData.search]);
   useEffect(() => {
     getData();
   }, []);
@@ -30,7 +27,7 @@ function Order() {
       Authorization: `Bearer ${token}`,
     },
   };
-  let users = `http://localhost:3000/checkout/get-checkout-seller`;
+  let users = `${process.env.REACT_APP_MY_API_KEY}/checkout/get-checkout-seller?search=${inputData.search}`;
   const getData = () => {
     axios
       .get(users, user)
@@ -45,13 +42,12 @@ function Order() {
       });
   };
   useEffect(() => {
-    console.log("checked", sortBy);
     getDataArchived();
-  }, [sortBy, sort, inputData.search]);
+  }, [inputData.search]);
   useEffect(() => {
     getDataArchived();
   }, []);
-  let archived = `http://localhost:3000/checkout/get-checkout-delivered`;
+  let archived = `${process.env.REACT_APP_MY_API_KEY}/checkout/get-checkout-delivered?search=${inputData.search}`;
   const getDataArchived = () => {
     axios
       .get(archived, user)
@@ -73,34 +69,21 @@ function Order() {
     });
     console.log(data);
   };
-  const ArchivedData = (id_product) => {
+  const DeliveryData = (id_checkout) => {
     axios
-      .put(`http://localhost:3000/products/set-archived/${id_product}`, user)
+      .put(
+        `${process.env.REACT_APP_MY_API_KEY}/checkout/put-checkout-id/${id_checkout}`
+      )
       .then((res) => {
-        console.log("Archived product success");
+        console.log("Delivered product success");
         console.log(res);
-        Swal.fire("Success", "Archived product success", "success");
+        Swal.fire("Success", "Delivered product success", "success");
         window.location.reload(false);
       })
       .catch((err) => {
-        console.log("Archived product failed");
+        console.log("Delivered product failed");
         console.log(err);
-        Swal.fire("Warning", "Archived product failed", "error");
-      });
-  };
-  const ActivatedData = (id_product) => {
-    axios
-      .put(`http://localhost:3000/products/set-activated/${id_product}`, user)
-      .then((res) => {
-        console.log("Activated product success");
-        console.log(res);
-        Swal.fire("Success", "Activated product success", "success");
-        window.location.reload(false);
-      })
-      .catch((err) => {
-        console.log("Activated product failed");
-        console.log(err);
-        Swal.fire("Warning", "Activated product failed", "error");
+        Swal.fire("Warning", "Delivered product failed", "error");
       });
   };
   const [key, setKey] = useState("active");
@@ -179,8 +162,8 @@ function Order() {
                         <td>
                           <button
                             className="btn btn-warning text-white"
-                            key={item.id_product}
-                            onClick={() => ArchivedData(item.id_product)}
+                            key={item.id_checkout}
+                            onClick={() => DeliveryData(item.id_checkout)}
                           >
                             Change Status
                           </button>
@@ -224,7 +207,6 @@ function Order() {
                       <th className="myfont3">Price Total</th>
                       <th className="myfont3">QTY</th>
                       <th className="myfont3">Action</th>
-                      <th className="myfont3">Action</th>
                     </tr>
                   </thead>
                   <tbody className="table-group-divider">
@@ -247,7 +229,7 @@ function Order() {
                             Detail Order
                           </button>
                         </td>
-                        <td>
+                        {/* <td>
                           <button
                             className="btn btn-warning text-white"
                             key={item.id_product}
@@ -255,7 +237,7 @@ function Order() {
                           >
                             Change Status
                           </button>
-                        </td>
+                        </td> */}
                       </tr>
                     ))}
                   </tbody>

@@ -22,7 +22,10 @@ function MyBagPage() {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/transaction/get-transaction`, user)
+      .get(
+        `${process.env.REACT_APP_MY_API_KEY}/transaction/get-transaction`,
+        user
+      )
       .then((res) => {
         console.log("Get data bag success");
         console.log(res.data);
@@ -39,7 +42,7 @@ function MyBagPage() {
   const DeleteBag = (id_transaction) => {
     axios
       .delete(
-        `http://localhost:3000/transaction/delete/${id_transaction}`,
+        `${process.env.REACT_APP_MY_API_KEY}/transaction/delete/${id_transaction}`,
         user
       )
       .then((res) => {
@@ -62,7 +65,11 @@ function MyBagPage() {
       product_id: product_id,
     };
     axios
-      .post(`http://localhost:3000/checkout/post-checkout`, form, user)
+      .post(
+        `${process.env.REACT_APP_MY_API_KEY}/checkout/post-checkout`,
+        form,
+        user
+      )
       .then((res) => {
         console.log("Checkout success");
         console.log(res);

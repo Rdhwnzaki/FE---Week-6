@@ -20,7 +20,7 @@ function ModalCategory() {
       Authorization: `Bearer ${token}`,
     },
   };
-  let getData = "http://localhost:3000/category";
+  let getData = `${process.env.REACT_APP_MY_API_KEY}/category`;
   useEffect(() => {
     axios
       .get(getData, user)
@@ -36,7 +36,10 @@ function ModalCategory() {
   }, []);
   const DeleteCategory = (id_category) => {
     axios
-      .delete(`http://localhost:3000/category/delete/${id_category}`, user)
+      .delete(
+        `${process.env.REACT_APP_MY_API_KEY}/category/delete/${id_category}`,
+        user
+      )
       .then((res) => {
         console.log("Delete category success");
         console.log(res);
@@ -75,7 +78,7 @@ function ModalCategory() {
           <div className="row mt-4">
             {data ? (
               data.map((item) => (
-                <div>
+                <div key={item.id_category}>
                   <div className="col-1">
                     <img
                       src={item?.photo_category}
@@ -89,7 +92,7 @@ function ModalCategory() {
                     style={{ marginLeft: "100px", marginTop: "-80px" }}
                   >
                     <h5 className="myfont">{item?.name_category}</h5>
-                    <button
+                    {/* <button
                       className="btn"
                       style={{
                         width: "90px",
@@ -103,7 +106,7 @@ function ModalCategory() {
                       }
                     >
                       Edit
-                    </button>
+                    </button> */}
                     <button
                       className="btn"
                       style={{

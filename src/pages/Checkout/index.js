@@ -25,7 +25,7 @@ export default function Checkout() {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/checkout/get-checkout`, user)
+      .get(`${process.env.REACT_APP_MY_API_KEY}/checkout/get-checkout`, user)
       .then((res) => {
         console.log("Get data checkout success");
         console.log(res.data);
@@ -44,7 +44,11 @@ export default function Checkout() {
       id_checkout: id_checkout,
     };
     axios
-      .put(`http://localhost:3000/checkout/put-checkout`, form, user)
+      .put(
+        `${process.env.REACT_APP_MY_API_KEY}/checkout/put-checkout`,
+        form,
+        user
+      )
       .then((res) => {
         console.log("Checkout success");
         console.log(res);

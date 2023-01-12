@@ -34,7 +34,7 @@ function HomePage() {
   };
   const [data, setData] = useState([]);
   const [dataCategory, setDataCategory] = useState([]);
-  const product = `${process.env.REACT_APP_MY_API_KEY}`;
+  const product = `${process.env.REACT_APP_MY_API_KEY}/products`;
   useEffect(() => {
     const getdata = async () => {
       try {
@@ -48,7 +48,7 @@ function HomePage() {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/category`, user)
+      .get(`${process.env.REACT_APP_MY_API_KEY}/category`, user)
       .then((res) => {
         console.log("Get category success");
         console.log(res.data);

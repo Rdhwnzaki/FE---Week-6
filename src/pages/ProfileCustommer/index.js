@@ -27,7 +27,7 @@ export default function ProfileCustommer() {
   };
   const [data, setData] = useState(null);
   const [startDate, setStartDate] = useState(new Date());
-  let users = "http://localhost:3000/users/profile";
+  let users = `${process.env.REACT_APP_MY_API_KEY}/users/profile`;
   useEffect(() => {
     axios
       .get(users, user)
@@ -75,9 +75,14 @@ export default function ProfileCustommer() {
     formData.append("address_user", updateData.address_user);
     console.log(formData);
     axios
-      .put(`http://localhost:3000/users/edit-profile`, formData, user, {
-        "content-type": "multipart/form-data",
-      })
+      .put(
+        `${process.env.REACT_APP_MY_API_KEY}/users/edit-profile`,
+        formData,
+        user,
+        {
+          "content-type": "multipart/form-data",
+        }
+      )
       .then((res) => {
         console.log("Update profile succes");
         console.log(res);

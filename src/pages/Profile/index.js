@@ -24,7 +24,7 @@ export default function ProfileSeller() {
     },
   };
   const [data, setData] = useState(null);
-  let users = "http://localhost:3000/users/profile";
+  let users = `${process.env.REACT_APP_MY_API_KEY}/users/profile`;
   useEffect(() => {
     axios
       .get(users, user)
@@ -68,9 +68,14 @@ export default function ProfileSeller() {
     formData.append("store_description", updateData.store_description);
     console.log(formData);
     axios
-      .put(`http://localhost:3000/users/edit-profile-seller`, formData, user, {
-        "content-type": "multipart/form-data",
-      })
+      .put(
+        `${process.env.REACT_APP_MY_API_KEY}/users/edit-profile-seller`,
+        formData,
+        user,
+        {
+          "content-type": "multipart/form-data",
+        }
+      )
       .then((res) => {
         console.log("Update profile succes");
         console.log(res);

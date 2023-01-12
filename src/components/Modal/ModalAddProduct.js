@@ -49,9 +49,14 @@ function ModalAddProduct() {
     formData.append("photo_product", photo_product);
     console.log(formData);
     axios
-      .post(`http://localhost:3000/products/post-product`, formData, user, {
-        "content-type": "multipart/form-data",
-      })
+      .post(
+        `${process.env.REACT_APP_MY_API_KEY}/products/post-product`,
+        formData,
+        user,
+        {
+          "content-type": "multipart/form-data",
+        }
+      )
       .then((res) => {
         console.log("Post product success");
         console.log(res);

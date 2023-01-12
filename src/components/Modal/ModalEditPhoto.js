@@ -27,9 +27,14 @@ function ModalEditPhoto() {
     formData.append("photo_user", photo_user);
     console.log(formData, "data dari handle data update");
     axios
-      .put(`http://localhost:3000/users/edit-photo`, formData, user, {
-        "content-type": "multipart/form-data",
-      })
+      .put(
+        `${process.env.REACT_APP_MY_API_KEY}/users/edit-photo`,
+        formData,
+        user,
+        {
+          "content-type": "multipart/form-data",
+        }
+      )
       .then((res) => {
         console.log("Update photo succes");
         console.log(res);

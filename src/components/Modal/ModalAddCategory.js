@@ -39,9 +39,14 @@ function ModalAddCategory() {
     formData.append("photo_category", photo_category);
     console.log(formData);
     axios
-      .post(`http://localhost:3000/category/post-category`, formData, user, {
-        "content-type": "multipart/form-data",
-      })
+      .post(
+        `${process.env.REACT_APP_MY_API_KEY}/category/post-category`,
+        formData,
+        user,
+        {
+          "content-type": "multipart/form-data",
+        }
+      )
       .then((res) => {
         console.log("Post category success");
         console.log(res);

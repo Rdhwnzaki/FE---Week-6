@@ -44,7 +44,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/products/detail/${id_product}`)
+      .get(`${process.env.REACT_APP_MY_API_KEY}/products/detail/${id_product}`)
       .then((res) => {
         console.log("Get detail product success");
         console.log(res.data);
@@ -67,7 +67,11 @@ export default function ProductDetail() {
       seller_id: sellerId,
     };
     axios
-      .post(`http://localhost:3000/transaction/post-transaction`, form, user)
+      .post(
+        `${process.env.REACT_APP_MY_API_KEY}/transaction/post-transaction`,
+        form,
+        user
+      )
       .then((res) => {
         console.log("Add product to bag success");
         console.log(res);

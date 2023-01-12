@@ -31,7 +31,7 @@ function NavTabs() {
       Authorization: `Bearer ${token}`,
     },
   };
-  let users = `http://localhost:3000/products/product-user?sortby=${sortBy}&sort=${sort}&search=${inputData.search}`;
+  let users = `${process.env.REACT_APP_MY_API_KEY}/products/product-user?sortby=${sortBy}&sort=${sort}&search=${inputData.search}`;
   const getData = () => {
     axios
       .get(users, user)
@@ -52,7 +52,7 @@ function NavTabs() {
   useEffect(() => {
     getDataArchived();
   }, []);
-  let archived = `http://localhost:3000/products/product-archived?sortby=${sortBy}&sort=${sort}&search=${inputData.search}`;
+  let archived = `${process.env.REACT_APP_MY_API_KEY}/products/product-archived?sortby=${sortBy}&sort=${sort}&search=${inputData.search}`;
   const getDataArchived = () => {
     axios
       .get(archived, user)
@@ -76,7 +76,10 @@ function NavTabs() {
   };
   const ArchivedData = (id_product) => {
     axios
-      .put(`http://localhost:3000/products/set-archived/${id_product}`, user)
+      .put(
+        `${process.env.REACT_APP_MY_API_KEY}/products/set-archived/${id_product}`,
+        user
+      )
       .then((res) => {
         console.log("Archived product success");
         console.log(res);
@@ -91,7 +94,10 @@ function NavTabs() {
   };
   const ActivatedData = (id_product) => {
     axios
-      .put(`http://localhost:3000/products/set-activated/${id_product}`, user)
+      .put(
+        `${process.env.REACT_APP_MY_API_KEY}/products/set-activated/${id_product}`,
+        user
+      )
       .then((res) => {
         console.log("Activated product success");
         console.log(res);

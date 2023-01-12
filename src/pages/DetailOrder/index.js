@@ -15,7 +15,7 @@ export default function DetailOrder() {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3000/checkout/get-checkout-detail/${id_checkout}`,
+        `${process.env.REACT_APP_MY_API_KEY}/checkout/get-checkout-detail/${id_checkout}`,
         user
       )
       .then((res) => {
