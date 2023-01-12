@@ -6,10 +6,15 @@ import NavbarAfterLogin from "../../components/Navbar/NavbarAfterLogin";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "./index.css";
+import { useNavigate } from "react-router-dom";
 
 function MyBagPage() {
   const [data, setData] = useState([]);
   const token = localStorage.getItem("token");
+  const [transaction_id, setTransactionId] = useState("");
+  const [seller_id, setSellerId] = useState("");
+  const [product_id, setProductId] = useState("");
+  const navigate = useNavigate();
   const user = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -22,6 +27,9 @@ function MyBagPage() {
         console.log("Get data bag success");
         console.log(res.data);
         setData(res.data.data);
+        setTransactionId(res.data.data[0].id_transaction);
+        setSellerId(res.data.data[0].seller_id);
+        setProductId(res.data.data[0].product_id);
       })
       .catch((err) => {
         console.log("Get data bag fail");
@@ -44,6 +52,27 @@ function MyBagPage() {
         console.log("Delete bag failed");
         console.log(err);
         Swal.fire("Warning", "Delete bag failed", "error");
+      });
+  };
+  const postData = async (e) => {
+    e.preventDefault();
+    let form = {
+      transaction_id: transaction_id,
+      seller_id: seller_id,
+      product_id: product_id,
+    };
+    axios
+      .post(`http://localhost:3000/checkout/post-checkout`, form, user)
+      .then((res) => {
+        console.log("Checkout success");
+        console.log(res);
+        Swal.fire("Success", "Checkout success", "success");
+        navigate("/checkout");
+      })
+      .catch((err) => {
+        console.log("Checkout failed");
+        console.log(err);
+        Swal.fire("Warning", "Checkout failed", "error");
       });
   };
   return (
@@ -134,20 +163,21 @@ function MyBagPage() {
                   </div>
                   <div className="row align-items-center py-3">
                     <div className="col-12">
-                      <Link to="/checkout" className="link">
-                        <button
-                          className="btn btn-danger myfont"
-                          style={{
-                            height: "50px",
-                            borderRadius: "40px",
-                            width: "350px",
-                          }}
-                        >
-                          <p className="myfont3" style={{ marginTop: "7px" }}>
-                            Buy
-                          </p>
-                        </button>
-                      </Link>
+                      {/* <Link to="/checkout" className="link"> */}
+                      <button
+                        className="btn btn-danger myfont"
+                        onClick={postData}
+                        style={{
+                          height: "50px",
+                          borderRadius: "40px",
+                          width: "350px",
+                        }}
+                      >
+                        <p className="myfont3" style={{ marginTop: "7px" }}>
+                          Buy
+                        </p>
+                      </button>
+                      {/* </Link> */}
                     </div>
                   </div>
                 </div>

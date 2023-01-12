@@ -20,6 +20,8 @@ import Swal from "sweetalert2";
 import { Outlet } from "react-router-dom";
 import EditCategory from "./pages/EditCategory";
 import Order from "./pages/Order";
+import History from "./pages/History";
+import DetailOrder from "./pages/DetailOrder";
 
 function App() {
   const PrivateRoute = () => {
@@ -69,6 +71,12 @@ function App() {
           </Route>
           <Route path="/order" element={<PrivateRoute />}>
             <Route index element={<Order />} />
+          </Route>
+          <Route path="/history" element={<PrivateRoute />}>
+            <Route index element={<History />} />
+          </Route>
+          <Route path="/detail-order/:id_checkout" element={<PrivateRoute />}>
+            <Route index element={<DetailOrder />} />
           </Route>
           <Route path="/reset" element={<Reset />} />
           <Route path="/otp" element={<Otp />} />

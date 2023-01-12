@@ -1,39 +1,35 @@
 /* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import NavbarAfterLogin from "../../components/Navbar/NavbarAfterLogin";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Swal from "sweetalert2";
-import { Tab } from "react-bootstrap";
-import { Tabs } from "react-bootstrap";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
+import { useNavigate } from "react-router-dom";
 
-function Order() {
+function History() {
   const [data, setData] = useState([]);
-  const [dataArchived, setDataArchived] = useState([]);
+  const [dataDone, setDataDone] = useState([]);
   const token = localStorage.getItem("token");
+  const [key, setKey] = useState("active");
   const navigate = useNavigate();
-  const [inputData, setInputData] = useState({
-    search: "",
-  });
-  const [sortBy, setSortBy] = useState("name_product");
-  const [sort, setSort] = useState("asc");
-  useEffect(() => {
-    console.log("checked", sortBy);
-    getData();
-  }, [sortBy, sort, inputData.search]);
-  useEffect(() => {
-    getData();
-  }, []);
   const user = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  let users = `http://localhost:3000/checkout/get-checkout-seller`;
+  const [inputData, setInputData] = useState({
+    search: "",
+  });
+  useEffect(() => {
+    getData();
+  }, [inputData.search]);
+  useEffect(() => {
+    getData();
+  }, []);
+  let getCheckout = `http://localhost:3000/checkout/get-checkout?search=${inputData.search}`;
   const getData = () => {
     axios
-      .get(users, user)
+      .get(getCheckout, user)
       .then((res) => {
         console.log(res.data.data);
         res.data && setData(res.data.data);
@@ -45,27 +41,25 @@ function Order() {
       });
   };
   useEffect(() => {
-    console.log("checked", sortBy);
-    getDataArchived();
-  }, [sortBy, sort, inputData.search]);
+    getDataDone();
+  }, [inputData.search]);
   useEffect(() => {
-    getDataArchived();
+    getDataDone();
   }, []);
-  let archived = `http://localhost:3000/checkout/get-checkout-delivered`;
-  const getDataArchived = () => {
+  let getCheckoutDone = `http://localhost:3000/checkout/get-checkout-done?search=${inputData.search}`;
+  const getDataDone = () => {
     axios
-      .get(archived, user)
+      .get(getCheckoutDone, user)
       .then((res) => {
         console.log(res.data.data);
-        res.data && setDataArchived(res.data.data);
+        res.data && setDataDone(res.data.data);
       })
       .catch((err) => {
         console.log("Get Data Fail");
         console.log(err);
-        setDataArchived([]);
+        setData([]);
       });
   };
-
   const handleChange = (e) => {
     setInputData({
       ...inputData,
@@ -73,44 +67,13 @@ function Order() {
     });
     console.log(data);
   };
-  const ArchivedData = (id_product) => {
-    axios
-      .put(`http://localhost:3000/products/set-archived/${id_product}`, user)
-      .then((res) => {
-        console.log("Archived product success");
-        console.log(res);
-        Swal.fire("Success", "Archived product success", "success");
-        window.location.reload(false);
-      })
-      .catch((err) => {
-        console.log("Archived product failed");
-        console.log(err);
-        Swal.fire("Warning", "Archived product failed", "error");
-      });
-  };
-  const ActivatedData = (id_product) => {
-    axios
-      .put(`http://localhost:3000/products/set-activated/${id_product}`, user)
-      .then((res) => {
-        console.log("Activated product success");
-        console.log(res);
-        Swal.fire("Success", "Activated product success", "success");
-        window.location.reload(false);
-      })
-      .catch((err) => {
-        console.log("Activated product failed");
-        console.log(err);
-        Swal.fire("Warning", "Activated product failed", "error");
-      });
-  };
-  const [key, setKey] = useState("active");
   return (
     <div>
       <NavbarAfterLogin />
       <div className="container text-start shadow rounded-2 mt-1 bg-white">
         <div className="row align-items-center">
           <div className="col-2">
-            <h4 className="text-secondary pt-4 mb-4 ms-3">My Order</h4>
+            <h4 className="text-secondary pt-4 mb-4 ms-3">My History</h4>
           </div>
         </div>
         <div className="row rounded-3">
@@ -122,15 +85,15 @@ function Order() {
           >
             <Tab eventKey="active" title="Active">
               <div className="bg-white">
-                <div className="container mt-2 p-2 rounded ">
-                  <h6 className="myfont3">Filter</h6>
+                <div className="container mt-2 p-2 rounded mb-5 ">
+                  <h6 className="myfont3 mb-4">Filter</h6>
                   <div className="container d-flex flex-row">
                     <div className="row">
                       <div className="col-5">
-                        <div className="search">
+                        <div className="search ms-2">
                           <input
                             type="text"
-                            className="form-control myfont3 rounded-3 "
+                            className="form-control myfont3 rounded-3"
                             value={inputData.search}
                             name="search"
                             onChange={handleChange}
@@ -148,10 +111,9 @@ function Order() {
                 >
                   <thead>
                     <tr>
-                      <th className="myfont3">Name Product</th>
+                      <th className="myfont3">Name</th>
                       <th className="myfont3">Status</th>
-                      <th className="myfont3">Price Total</th>
-                      <th className="myfont3">QTY</th>
+                      <th className="myfont3">Total Price</th>
                       <th className="myfont3">Action</th>
                       <th className="myfont3">Action</th>
                     </tr>
@@ -159,16 +121,13 @@ function Order() {
                   <tbody className="table-group-divider">
                     {data.map((item, index) => (
                       <tr key={index + 1}>
-                        <td className="myfont3">{item?.name_product}</td>
-                        <td className="myfont3">{item?.name_status}</td>
-                        <td className="myfont3">
-                          Rp.{item?.total_transaction}
-                        </td>
-                        <td className="myfont3">{item?.qty_transaction}</td>
+                        <td className="myfont3">{item.name_product}</td>
+                        <td className="myfont3">{item.name_status}</td>
+                        <td className="myfont3">Rp.{item.total_transaction}</td>
                         <td>
                           <button
-                            className="btn btn-danger text-white"
-                            key={item.id_checkout}
+                            className="btn btn-danger"
+                            key={item.id_product}
                             onClick={() =>
                               navigate(`/detail-order/${item.id_checkout}`)
                             }
@@ -180,9 +139,9 @@ function Order() {
                           <button
                             className="btn btn-warning text-white"
                             key={item.id_product}
-                            onClick={() => ArchivedData(item.id_product)}
+                            onClick={() => navigate(`/checkout`)}
                           >
-                            Change Status
+                            Checkout
                           </button>
                         </td>
                       </tr>
@@ -191,17 +150,17 @@ function Order() {
                 </table>
               </div>
             </Tab>
-            <Tab eventKey="delivered" title="Delivered">
+            <Tab eventKey="done" title="Done">
               <div className="bg-white">
-                <div className="container  mt-2 p-2 rounded ">
+                <div className="container  mt-2 p-2 rounded mb-2 ">
                   <h6 className="myfont3">Filter</h6>
                   <div className="container d-flex flex-row">
                     <div className="row">
                       <div className="col-5">
-                        <div className="search ">
+                        <div className="search ms-2">
                           <input
                             type="text"
-                            className="form-control myfont3 rounded-3 "
+                            className="form-control myfont3 rounded-3"
                             value={inputData.search}
                             name="search"
                             onChange={handleChange}
@@ -219,41 +178,27 @@ function Order() {
                 >
                   <thead>
                     <tr>
-                      <th className="myfont3">Name Product</th>
-                      <th className="myfont3">Status</th>
-                      <th className="myfont3">Price Total</th>
-                      <th className="myfont3">QTY</th>
-                      <th className="myfont3">Action</th>
+                      <th className="myfont3">Name</th>
+                      <th className="myfont3">Category</th>
+                      <th className="myfont3">Total Price</th>
                       <th className="myfont3">Action</th>
                     </tr>
                   </thead>
                   <tbody className="table-group-divider">
-                    {dataArchived.map((item, index) => (
+                    {dataDone.map((item, index) => (
                       <tr key={index + 1}>
-                        <td className="myfont3">{item?.name_product}</td>
-                        <td className="myfont3">{item?.name_status}</td>
-                        <td className="myfont3">
-                          Rp.{item?.total_transaction}
-                        </td>
-                        <td className="myfont3">{item?.qty_transaction}</td>
+                        <td className="myfont3">{item.name_product}</td>
+                        <td className="myfont3">{item.name_status}</td>
+                        <td className="myfont3">Rp.{item.total_transaction}</td>
                         <td>
                           <button
-                            className="btn btn-danger text-white"
-                            key={item.id_checkout}
+                            className="btn btn-danger"
+                            key={item.id_product}
                             onClick={() =>
                               navigate(`/detail-order/${item.id_checkout}`)
                             }
                           >
                             Detail Order
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                            className="btn btn-warning text-white"
-                            key={item.id_product}
-                            onClick={() => ActivatedData(item.id_product)}
-                          >
-                            Change Status
                           </button>
                         </td>
                       </tr>
@@ -269,4 +214,4 @@ function Order() {
   );
 }
 
-export default Order;
+export default History;

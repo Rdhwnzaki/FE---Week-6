@@ -48,6 +48,7 @@ export default function ProfileCustommer() {
     phone_user: data?.phone_user,
     gender_user: data?.gender_user,
     date_user: data?.date_user,
+    address_user: data?.address_user,
   });
 
   // const handlePhotoChange = (e) => {
@@ -71,6 +72,7 @@ export default function ProfileCustommer() {
     formData.append("phone_user", updateData.phone_user);
     formData.append("gender_user", updateData.gender_user);
     formData.append("date_user", updateData.date_user);
+    formData.append("address_user", updateData.address_user);
     console.log(formData);
     axios
       .put(`http://localhost:3000/users/edit-profile`, formData, user, {
@@ -100,7 +102,7 @@ export default function ProfileCustommer() {
               src={data?.photo_user}
               alt=""
               className="img rounded-pill"
-              style={{ height: "140px", width: "140px" }}
+              style={{ height: "110px", width: "110px" }}
             />
             <div className="d-flex flex-column h-50 mt-3 ms-2">
               <h6 className="myfont ms-3">{data?.fullname_user}</h6>
@@ -110,87 +112,36 @@ export default function ProfileCustommer() {
         </div>
 
         <div className="w-50 justify-content-center d-flex flex-column mt-5 ms-5">
-          <Accordion flush>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>
-                <p className="myfont3">
-                  <div
-                    className="btn mx-2"
-                    style={{
-                      backgroundColor: "#456BF3",
-                      borderRadius: "50px",
-                      width: "40px",
-                    }}
-                  >
-                    <img src={homelogo} alt="" />
-                  </div>
-                  Store
-                </p>
-              </Accordion.Header>
-              <Accordion.Body>
-                <Link to="/profile">
-                  <button className="btn">
-                    <p className=" myfont3">Store Profile</p>
-                  </button>
-                </Link>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-          <Accordion flush>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>
-                <p className="myfont3">
-                  <div
-                    className="btn mx-2"
-                    style={{
-                      backgroundColor: "#F36F45",
-                      borderRadius: "50px",
-                      width: "40px",
-                    }}
-                  >
-                    <img src={cube} alt="" />
-                  </div>
-                  Product
-                </p>
-              </Accordion.Header>
-              <Accordion.Body>
-                <Link to="/product">
-                  <button className="btn">
-                    <p className=" myfont3">My Product</p>
-                  </button>
-                </Link>
-              </Accordion.Body>
-              <Accordion.Body>
-                <Link to="/selling">
-                  <button className="btn">
-                    <p className=" myfont3">Selling products</p>
-                  </button>
-                </Link>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-          <Accordion flush>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>
-                <p className="myfont3">
-                  <div
-                    className="btn mx-2"
-                    style={{
-                      backgroundColor: "#F3456F",
-                      borderRadius: "50px",
-                      width: "40px",
-                    }}
-                  >
-                    <img src={cart} alt="" />
-                  </div>
-                  Order
-                </p>
-              </Accordion.Header>
-              <Accordion.Body>
-                <p className="myfont3">My Order</p>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
+          <Link to="/history">
+            <button className="myfont3 btn">
+              <div
+                className="btn mx-2"
+                style={{
+                  backgroundColor: "#F36F45",
+                  borderRadius: "50px",
+                  width: "40px",
+                }}
+              >
+                <img src={cube} alt="" />
+              </div>
+              History
+            </button>
+          </Link>
+          <Link to="/mybag">
+            <button className="myfont3 btn mb-5">
+              <div
+                className="btn mx-2"
+                style={{
+                  backgroundColor: "#F3456F",
+                  borderRadius: "50px",
+                  width: "40px",
+                }}
+              >
+                <img src={cart} alt="" />
+              </div>
+              Cart
+            </button>
+          </Link>
           <button
             className="btn btn-danger btn-small rounded-pill"
             onClick={() => logout()}
@@ -236,6 +187,19 @@ export default function ProfileCustommer() {
               </div>
             </div>
             <div className="col col-12 row ">
+              <div className="col col-3 myfont3">Address</div>
+              <div className="col col-9">
+                <input
+                  type="text"
+                  className="form-control  mb-3 myfont3"
+                  name="address_user"
+                  placeholder={data?.address_user}
+                  onChange={(e) => handleChange(e)}
+                  value={updateData.address_user}
+                />
+              </div>
+            </div>
+            <div className="col col-12 row ">
               <div className="col col-3 myfont3">Phone Number</div>
               <div className="col col-9">
                 <input
@@ -253,7 +217,7 @@ export default function ProfileCustommer() {
               <div className="col col-9 row mb-3">
                 <input
                   type="text"
-                  className="form-control  mb-3 myfont3"
+                  className="form-control  mb-3 myfont3 ms-2"
                   name="gender_user"
                   placeholder={data?.gender_user}
                   onChange={(e) => handleChange(e)}
