@@ -6,8 +6,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
+import NavbarAfterLogin from "../../components/Navbar/NavbarAfterLogin";
 
 function Category() {
+  const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
   const { id_category } = useParams();
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ function Category() {
   }, []);
   return (
     <div>
-      <NavbarBeforeLogin />
+      {token ? <NavbarAfterLogin /> : <NavbarBeforeLogin />}
       <div className="container-fluid bg-new">
         <div className="container py-3">
           <div className="row py-3">

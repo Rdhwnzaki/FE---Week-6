@@ -141,7 +141,7 @@ export default function ProfileCustommer() {
               >
                 <img src={cart} alt="" />
               </div>
-              Cart
+              My Bag
             </button>
           </Link>
           <button
