@@ -40,7 +40,9 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/category/:id_category" element={<Category />} />
-        <Route path="/productdetail/:id_product" element={<ProductDetail />} />
+        <Route path="/productdetail/:id_product" element={<PrivateRoute />}>
+          <Route index element={<ProductDetail />} />
+        </Route>
         <Route path="/mybag" element={<PrivateRoute />}>
           <Route index element={<MyBag />} />
         </Route>
