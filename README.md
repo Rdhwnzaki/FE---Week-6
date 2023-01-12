@@ -81,13 +81,13 @@ npm install
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
 | ![Register](https://github.com/Rdhwnzaki/Frontend-Shop.id/blob/main/screenshot/register.png "Register Page") | ![Verification](https://github.com/Rdhwnzaki/Frontend-Shop.id/blob/main/screenshot/verification.png "Verification Page") |
 
-| Login Page                                                                                          | Landing Page                                                                                                       |
-| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| ![Login](https://github.com/Rdhwnzaki/Frontend-Shop.id/blob/main/screenshot/login.png "Login Page") | ![Landing Page](https://github.com/Rdhwnzaki/Frontend-Shop.id/blob/main/screenshot/landing-page.png"Landing Page") |
+| Login                                                                                          | Landing Page                                                                                                        |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| ![Login](https://github.com/Rdhwnzaki/Frontend-Shop.id/blob/main/screenshot/login.png "Login") | ![Landing Page](https://github.com/Rdhwnzaki/Frontend-Shop.id/blob/main/screenshot/landing-page.png "Landing Page") |
 
-| Category                                                                                                | Product Detail                                                                                                        |
-| ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| ![Category](https://github.com/Rdhwnzaki/Frontend-Shop.id/blob/main/screenshot/category.png "Category") | ![Product Detail](https://github.com/Rdhwnzaki/Frontend-Shop.id/blob/main/screenshot/product-detail.png"Flight Page") |
+| Category                                                                                                | Product Detail                                                                                                            |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| ![Category](https://github.com/Rdhwnzaki/Frontend-Shop.id/blob/main/screenshot/category.png "Category") | ![Product Detail](https://github.com/Rdhwnzaki/Frontend-Shop.id/blob/main/screenshot/product-detail.png "Product Detail") |
 
 | My Bag                                                                                           | Checkout/Payment                                                                                        |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
