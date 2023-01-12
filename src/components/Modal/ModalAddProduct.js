@@ -10,7 +10,7 @@ function ModalAddProduct() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [data, setData] = useState(null);
+  const [data] = useState(null);
   const [photo_product, setPhotoProduct] = useState(null);
   const token = localStorage.getItem("token");
   const user = {

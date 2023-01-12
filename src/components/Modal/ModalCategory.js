@@ -1,11 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Form, ModalBody } from "react-bootstrap";
 import ModalAddCategory from "./ModalAddCategory";
-import { useNavigate } from "react-router-dom";
 
 function ModalCategory() {
   const [show, setShow] = useState(false);
@@ -14,7 +13,6 @@ function ModalCategory() {
   const handleShow = () => setShow(true);
   const [data, setData] = useState(null);
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
   const user = {
     headers: {
       Authorization: `Bearer ${token}`,

@@ -1,11 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import jas from "../picture/jas.png";
 import { Link } from "react-router-dom";
-import { FaChevronRight, FaStar } from "react-icons/fa";
 import NavbarBeforeLogin from "../../components/Navbar/NavbarBeforeLogin";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FaStar } from "react-icons/fa";
 
 function Category() {
   const [data, setData] = useState([]);

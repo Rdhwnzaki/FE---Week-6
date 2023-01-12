@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from "react";
 import NavbarAfterLogin from "../../components/Navbar/NavbarAfterLogin";

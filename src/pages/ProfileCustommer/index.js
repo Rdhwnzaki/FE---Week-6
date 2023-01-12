@@ -1,11 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./Profile.module.css";
-import DatePicker from "react-datepicker";
-import homelogo from "../../image/homelogo.png";
 import cube from "../../image/cube.png";
-import Accordion from "react-bootstrap/Accordion";
 import cart from "../../image/shopping-cart (3) 1.png";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +24,6 @@ export default function ProfileCustommer() {
     },
   };
   const [data, setData] = useState(null);
-  const [startDate, setStartDate] = useState(new Date());
   let users = `${process.env.REACT_APP_MY_API_KEY}/users/profile`;
   useEffect(() => {
     axios

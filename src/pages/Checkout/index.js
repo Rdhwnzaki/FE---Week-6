@@ -1,10 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import ModalAddress from "../../components/Modal/ModalAddress";
-import ModalPayment from "../../components/Modal/ModalPayment";
 import NavbarAfterLogin from "../../components/Navbar/NavbarAfterLogin";
-import jas from "../picture/jas.png";
-import jeans from "../picture/jeans.png";
 import { Checkbox } from "@mui/material";
 import { red } from "@mui/material/colors";
 import gopay from "../../image/gopay.png";

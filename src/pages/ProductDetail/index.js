@@ -2,11 +2,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { FaChevronRight } from "react-icons/fa";
-import pic1 from "../picture/pagep1.png";
-import pic2 from "../picture/pagep2.png";
-import pic3 from "../picture/pagep3.png";
-import pic4 from "../picture/pagep4.png";
 import { FaStar } from "react-icons/fa";
 import NavbarBeforeLogin from "../../components/Navbar/NavbarBeforeLogin";
 import NavbarAfterLogin from "../../components/Navbar/NavbarAfterLogin";

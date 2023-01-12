@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Form } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 const EditCategory = () => {
-  const [data, setData] = useState(null);
+  const [data] = useState(null);
   const token = localStorage.getItem("token");
   const [photo_category, setPhoto] = useState("");
 

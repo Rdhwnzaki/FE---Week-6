@@ -10,7 +10,7 @@ function ModalAddCategory() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [data, setData] = useState(null);
+  const [data] = useState(null);
   const [photo_category, setPhotoCategory] = useState(null);
   const token = localStorage.getItem("token");
   const user = {

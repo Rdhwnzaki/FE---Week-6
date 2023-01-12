@@ -1,18 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Carousel from "react-bootstrap/Carousel";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Slider from "react-slick";
 import carousel1 from "../image/curousel1.png";
 import carousel2 from "../image/curousel2.png";
 import carousel3 from "../image/curousel3.png";
 import carousel4 from "../image/curousel4.png";
 import carousel5 from "../image/curousel5.png";
-import tshirt from "../image/tshirt.png";
-import shorts from "../image/shorts.png";
-import jacket from "../image/jacket.png";
-import pants from "../image/pants.png";
-import shoes from "../image/shoes.png";
-import jam from "../image/jam.png";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import NavbarBeforeLogin from "../components/Navbar/NavbarBeforeLogin";
