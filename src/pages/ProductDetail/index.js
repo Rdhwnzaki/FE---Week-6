@@ -24,7 +24,7 @@ export default function ProductDetail() {
       Authorization: `Bearer ${token}`,
     },
   };
-  const product = `${process.env.REACT_APP_MY_API_KEY}`;
+  const product = `${process.env.REACT_APP_MY_API_KEY}/products`;
   useEffect(() => {
     const getdata = async () => {
       try {
