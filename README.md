@@ -1,4 +1,4 @@
-<h1 align="center">ANKASA TICKETING</h1>
+<h1 align="center">Shop.id</h1>
 
 <p align="center">
   <img height="150" src="https://github.com/Rdhwnzaki/Frontend-Shop.id/blob/main/screenshot/logo.png"  />
@@ -109,7 +109,7 @@ npm install
 ## Related Project
 
 - [`BACKEND SHOP.ID`](https://github.com/Rdhwnzaki/Backend-Shop.id)
-- [`DEMO SHOP.ID`](https://warm-salamander-212510.netlify.app)
+- [`DEMO SHOP.ID`](https://shopid-rdhwnzaki.netlify.app)
 
 ## License
 
